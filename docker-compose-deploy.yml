@@ -5,10 +5,11 @@ services:
     build:
       context: .
     container_name: app
+    # uwsgi --http:9000 --module diep_project.wsgi"
     command: >
       sh -c "python manage.py collectstatic --noinput &&
              python manage.py migrate
-             uwsgi --socket :9000 --workers 4 --master --enable-threads --module diep_project.wsgi"
+             uwsgi --socket :8080 --workers 4 --master --enable-threads --module diep_project.wsgi"
     restart: always
     volumes:
       - static-data:/vol/web
@@ -45,7 +46,7 @@ services:
       - app
     ports:
       - 80:8000
-      - 443:8000
+      # - 443:8000
     volumes:
       - static-data:/vol/static
 
