@@ -10,7 +10,7 @@ COPY ./hamerapp /hamerapp
 COPY ./scripts /scripts
 
 WORKDIR /hamerapp
-EXPOSE 8000
+# EXPOSE 8000
 
 RUN python -m venv /py && \
     /py/bin/python -m pip install --upgrade pip && \
