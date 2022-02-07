@@ -27,3 +27,40 @@ server {
         proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
     }
 }
+
+################### uwsgi_params ######################
+upstream django {
+    server app:8000;
+}
+
+server {
+    listen        80;
+    server_name   hamerusa.vn;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen        443 ssl;
+    server_name   hamerusa.vn;
+    charset       utf-8;
+    #access_log    /www/log/access.log combined;
+    #error_log     /www/log/error.log error;
+
+    ssl_certificate       /etc/nginx/hamerusavn.crt;
+    ssl_certificate_key   /etc/nginx/hamerusavn.key;
+
+    client_max_body_size    100M;
+
+    location /static {
+        alias /vol/static;
+    }
+
+    location / {
+        include       uwsgi_params;
+        uwsgi_pass    django;
+        uwsgi_param   Host                $http_host;
+        uwsgi_param   X-Real-IP           $remote_addr;
+        uwsgi_param   X-Forwarded-For     $proxy_add_x_forwarded_for;
+        uwsgi_param   X-Forwarded-Proto   $http_x_forwarded_proto;
+    }
+}
