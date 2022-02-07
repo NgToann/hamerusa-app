@@ -8,10 +8,11 @@ services:
     # uwsgi --http:9000 --module diep_project.wsgi" 0.0.0.0:5000
     # uwsgi --socket :9000 --workers 4 --master --enable-threads --module diep_project.wsgi
     #uwsgi --http :8000 --module diep_project.wsgi"
+    #uwsgi --ini uwsgi.ini"
     command: >
       sh -c "python manage.py collectstatic --noinput &&
              python manage.py migrate
-             uwsgi --ini uwsgi.ini"
+             uwsgi --http :8000 --module diep_project.wsgi"
     restart: always
     volumes:
       - static-data:/vol/web
