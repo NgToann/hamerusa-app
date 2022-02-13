@@ -9,15 +9,16 @@ services:
     # uwsgi --socket :9000 --workers 4 --master --enable-threads --module diep_project.wsgi
     #uwsgi --http :8000 --module diep_project.wsgi"
     #uwsgi --ini uwsgi.ini"
+    #uwsgi --http :8000 --module diep_project.wsgi"
     command: >
       sh -c "python manage.py collectstatic --noinput &&
              python manage.py migrate
-             uwsgi --http :8000 --module diep_project.wsgi"
+             gunicorn diep_project.wsgi:application --bind 0.0.0.0:8000"
     restart: always
     volumes:
       - static-data:/vol/web
     expose:
-      - "8000"
+      - 8000
     environment:
       - DB_HOST=db
       - DB_NAME=${DB_NAME}
@@ -47,12 +48,12 @@ services:
     # command: >
     #   sh -c "envsubst < /etc/nginx/default.conf.tpl > /etc/nginx/conf.d/default.conf
     #          nginx -g 'daemon off;'"
-    links:
-      - app:app
+    # links:
+    #   - app:app
     depends_on:
       - app
     ports:
-      - 80:80
+      - 1300:80
       # - 443:8000
     volumes:
       - static-data:/vol/static
