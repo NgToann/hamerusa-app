@@ -21,7 +21,7 @@ class PropertyRightAdmin(admin.ModelAdmin):
 admin.site.register(PropertyRight, PropertyRightAdmin)
 
 class IngredientAdmin(admin.ModelAdmin):
-    list_display = ('title', 'display_type', 'name', 'photo')
+    list_display = ('title', 'display_type', 'number', 'name', 'photo')
 admin.site.register(Ingredient, IngredientAdmin)
 
 class EffectionAdmin(admin.ModelAdmin):
@@ -65,6 +65,8 @@ admin.site.register(Article, ArticleAdmin)
 class ProductAdmin(ImportExportModelAdmin):
     list_display = ('product_name', 'release_name', 'product_price', 'serial_no', "scanned", 'created')
     search_fields = ["product_name", "release_name", "product_code", "product_price", "serial_no"]
+    list_filter = ['release_name']
+    list_per_page = 50
     pass
 admin.site.register(ReleaseProduct)
 
@@ -73,7 +75,7 @@ class YoutubeVideoAdmin(admin.ModelAdmin):
 admin.site.register(YoutubeVideo, YoutubeVideoAdmin)
 
 class SlideAdmin(admin.ModelAdmin):
-    list_display = ('title', 'photo' ,'photoURL')
+    list_display = ('title', 'photo', 'number', 'photoURL')
 admin.site.register(Slide, SlideAdmin)
 
 class ReportAdmin(admin.ModelAdmin):

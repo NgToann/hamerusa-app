@@ -59,6 +59,7 @@ class WebContent(models.Model):
 class Slide(models.Model):
     title = models.CharField(max_length=100, verbose_name="Tiêu đề (chung)")
     photo = models.ImageField(upload_to="slide",null=True, blank=True, verbose_name="Hình ảnh slide")
+    number = models.IntegerField(verbose_name="Thứ tự")
     photo_alt = models.CharField(max_length=500, null=True, blank=True, verbose_name="Mô tả ngắn (Hình ảnh)")
     @property
     def photoURL(self):
@@ -72,6 +73,7 @@ class Slide(models.Model):
         return self.title
     class Meta:
         verbose_name_plural = "03. Slide hình ảnh"
+        ordering = ['number']
 
 class PropertyRight(models.Model):
     photo_top_left = models.ImageField(upload_to="property_right",null=True, blank=True, verbose_name="Hình ảnh (trên - trái)")
@@ -103,6 +105,7 @@ class Ingredient(models.Model):
     )
     title = models.CharField(max_length=200, null=True, blank=True, verbose_name="Tiêu đề chính")
     display_type = models.CharField(max_length=200, verbose_name="Hiển thị", choices=DISPLAY_TYPE)
+    number = models.IntegerField(default=0, verbose_name="Thứ tự")
     name = models.CharField(max_length=200, null=True, blank=True, verbose_name="Tên thành phần")
     photo = models.ImageField(upload_to="ingredients",null=True, blank=True, verbose_name="Hình ảnh")
     photo_alt = models.CharField(max_length=500, null=True, blank=True, verbose_name="Mô tả ngắn (Hình ảnh)")
@@ -110,6 +113,7 @@ class Ingredient(models.Model):
         return self.name
     class Meta:
         verbose_name_plural = "05. Thành phần"
+        ordering = ['number']
         
 class Effection(models.Model):
     GROUP = (
@@ -125,7 +129,7 @@ class Effection(models.Model):
         verbose_name_plural = "06. Công dụng"
 
 class ProductPhoto(models.Model):
-    number = models.IntegerField(verbose_name="Thứ tự")
+    number = models.IntegerField(default=0, verbose_name="Thứ tự")
     photo = models.ImageField(upload_to="products",null=True, blank=True, verbose_name="Hình ảnh")
     photo_alt = models.CharField(max_length=500, null=True, blank=True, verbose_name="Mô tả ngắn (Hình ảnh)")
     is_display = models.BooleanField(default=False, verbose_name="Hiển thị trang chủ")
@@ -195,6 +199,7 @@ class Product(models.Model):
         return self.product_name
     class Meta:
         verbose_name_plural = "12. Sản phẩm"
+        ordering = ['created']
 
 #HM-000000
 class ReleaseProduct(models.Model):

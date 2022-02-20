@@ -65,7 +65,7 @@
                     <a href="javascript:void(0)" class="callNavigation">
                         <i class="fal fa-bars"></i>
                     </a>
-                    <a href="javascript:void(0)">
+                    <a href="{% url 'home' %}">
                         <img src="{% static 'static/public/upload/logo/LOGO-HAMER-CANDY-NEW.png' %} " alt="Home - Hamer USA">
                     </a>
                 </div>
@@ -299,7 +299,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="section-heading text-center">
-                                {{ingredients.0.title}}
+                                {{ingredients_right.0.title}}
                             </div>
                         </div>
                     </div>
@@ -362,6 +362,7 @@
                                 </div>
                                 {% endfor %}
                             </div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                 </div>
@@ -403,7 +404,7 @@
                 <div class="banner-layout">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-8 position-relative">
+                            <div class="col-md-7 position-relative">
                                 {% for effection in efections_group2 %}
                                 <div class="mb-5 text-start">
                                     <div class="section-heading">
@@ -416,6 +417,7 @@
                                 </div>
                                 {% endfor %}
                             </div>
+                            <div class="col-md-5"></div>
                         </div>
                     </div>
                 </div>
@@ -503,11 +505,11 @@
                                             </div>
                                             <div class="card-footer">
                                                 <!-- data-id="2007" data-name="3240USD/CARTON/864 CANDY" class="button callModalOrderProduct -->
-                                                <a href="javascript:void(0)" class="button callModalOrderProduct">Buy now</a>
+                                                <a href="javascript:void(0)" class="button callModalOrderProduct" data-bs-toggle="modal" data-bs-target="#modal{{retail.id}}">Buy now</a>
                                             </div>
                                         </div>
                                     </div>
-                                    {% endfor %}
+                                    {% endfor %}                                    
                                 </div>
                                 <div class="swiper-pagination"></div>
                             </div>
@@ -518,6 +520,73 @@
                 </div>
             </div>
         </div>
+        <!-- Button trigger modal -->
+        {% comment %} <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Launch static backdrop modal
+        </button> {% endcomment %}
+        <!-- Modal -->
+        {% for retail in retails %}
+            <div class="modal fade" id="modal{{retail.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="staticBackdropLabel">Order - {{retail.name}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-landing" id="form-order" action="{% url 'orderProduct' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <input type="text" required oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Please enter fullname')" autocomplete="off" class="form-control" name="full_name" id=full_name "
+                                    placeholder=" Fullname... ">
+                            </div>
+                            <div class=" mb-3 ">
+                                <input type=" text " required oninput=" setCustomValidity( '' ) "
+                                    oninvalid=" this.setCustomValidity( 'Please enter address' ) " autocomplete=" off "
+                                    class=" form-control " name="address " id="address " placeholder=" Address... ">
+                            </div>
+                            <div class=" row row-5 ">
+                                <div class=" col-md-6 ">
+                                    <div class=" mb-3 ">
+                                        <input type=" tel " required oninput=" setCustomValidity( '' ) "
+                                            oninvalid=" this.setCustomValidity( 'Please enter phone' ) "
+                                            autocomplete=" off " class=" form-control " name="phone_number " id="phone_number "
+                                            minlength=" 10 " maxlength=" 15 " placeholder=" Phone ">
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 ">
+                                    <div class=" mb-3 ">
+                                        <input type=" email " 
+                                            {% comment %} required oninput=" setCustomValidity( '' ) " {% endcomment %}
+                                            {% comment %} oninvalid=" this.setCustomValidity( 'Please enter email' ) " {% endcomment %}
+                                            autocomplete=" off " class=" form-control " name="email " id="email "
+                                            placeholder=" Email... ">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class=" mb-3 ">
+                                <select required name="id_sanpham " id="release_product_id " class=" form-select ">
+                                    <option value="{{retail.id}} ">{{retail.name}}</option>
+                                </select>
+                            </div>
+                            <div class=" mb-3 ">
+                                <textarea name="notes " class=" form-control " id="notes " rows=" 5 "
+                                    placeholder=" Notes... "></textarea>
+                            </div>
+                            <div class=" text-center ">
+                                <button id="btnOrder " type=" submit ">Buy now</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <a href="javascript:void(0)" class="button">Buy now</a>
+                    </div> -->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}   
+
 
         <!-- CERTIFICATE -->
         <div class="section-gap py-5 section-bg_red__dark">
@@ -601,8 +670,9 @@
 									</div>
 									<div class=" col-md-6 ">
 										<div class=" mb-3 ">
-											<input type=" email " required oninput=" setCustomValidity( '' ) "
-												oninvalid=" this.setCustomValidity( 'Please enter email' ) "
+											<input type=" email " 
+                                                {% comment %} required oninput=" setCustomValidity( '' ) " {% endcomment %}
+												{% comment %} oninvalid=" this.setCustomValidity( 'Please enter email' ) " {% endcomment %}
 												autocomplete=" off " class=" form-control " name="email " id="email "
 												placeholder=" Email... ">
 										</div>
