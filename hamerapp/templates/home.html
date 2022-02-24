@@ -143,13 +143,13 @@
             </div>
         </div>
 
-        <div class="section-img">
+        <div class="section-img d-sm-none d-md-block">
             <div class="img-inner position-relative overflow-hidden">
                 <img src="{% static 'static/public/upload/images/divider.png' %} " class="img-fluid w-100" alt="">
             </div>
         </div>
 
-        <div class="section-banner_second">
+        <div id="chonghanggia-main" class="section-banner_second">
             <div class="banner-inner">
                 <div class="banner-background">
                     {% if webcontent.counterfeiting_photo %}
@@ -194,7 +194,7 @@
             </div>
         </div>
 
-        <div class="section-img">
+        <div class="section-img d-none d-md-block">
             <div class="img-inner position-relative overflow-hidden">
                 <img src="{% static 'static/public/upload/images/divider.png' %} " class="img-fluid w-100" alt="divider">
             </div>
@@ -740,10 +740,16 @@
         if ($(window).width() < 512) {
             $("#chonghanggia").addClass(" d-none");
             $("#chonghanggia-mobile").removeClass(" d-none");
-        } else {
+            $("#chonghanggia-main").removeClass(" d-none");
+        } else if ($(window).width() > 912) {
             $("#chonghanggia").removeClass(" d-none");
             $("#chonghanggia-mobile").addClass(" d-none");
-      }
+            $("#chonghanggia-main").removeClass(" d-none");
+        } else {
+            $("#chonghanggia").addClass(" d-none");
+            $("#chonghanggia-mobile").addClass(" d-none");
+            $("#chonghanggia-main").addClass(" d-none");
+        }
     }
     resize();
     $(window).on('resize', resize);
