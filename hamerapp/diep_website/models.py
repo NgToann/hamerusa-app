@@ -37,6 +37,7 @@ class WebContent(models.Model):
     
     counterfeiting = models.TextField(max_length=500, null=True, blank=True, verbose_name="Nội dung chống hàng giả")
     counterfeiting_photo = models.ImageField(upload_to="home_photos",null=True, blank=True, verbose_name="Hình ảnh chống hàng giả")
+    counterfeiting_photo_mobile = models.ImageField(upload_to="home_photos",null=True, blank=True, verbose_name="Hình ảnh chống hàng giả (Mobile)")
     counterfeiting_photo_alt = models.CharField(max_length=500, null=True, blank=True, verbose_name="Mô tả ngắn (Hình ảnh)")
     
     video_photo = models.ImageField(upload_to="home_photos",null=True, blank=True, verbose_name="Hình ảnh video")

@@ -153,7 +153,8 @@
             <div class="banner-inner">
                 <div class="banner-background">
                     {% if webcontent.counterfeiting_photo %}
-                    <div class="banner-background_inner lazy" data-src="{{webcontent.counterfeiting_photo.url}} "></div>
+                    <div id="chonghanggia" class="banner-background_inner lazy" data-src="{{webcontent.counterfeiting_photo.url}} "></div>
+                    <div id="chonghanggia-mobile" class="banner-background_inner lazy" data-src="{{webcontent.counterfeiting_photo_mobile.url}} "></div>
                     {% else %}
                     <div class="banner-background_inner lazy" data-src="{% static 'static/images/default.jpg' %}"></div>
                     {% endif %}
@@ -733,5 +734,20 @@
 			</div>
 		</div>
 	</div>
+{% block javascript %}
+<script>
+    function resize(){
+        if ($(window).width() < 512) {
+            $("#chonghanggia").addClass(" d-none");
+            $("#chonghanggia-mobile").removeClass(" d-none");
+        } else {
+            $("#chonghanggia").removeClass(" d-none");
+            $("#chonghanggia-mobile").addClass(" d-none");
+      }
+    }
+    resize();
+    $(window).on('resize', resize);
+</script>
+{% endblock javascript %}
 </body>
 </html>
