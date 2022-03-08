@@ -60,7 +60,7 @@
 
 <body>
     <header id="header" class="header-wrapper">
-        <div class="container">
+        <div class="container" style="max-width: 1170px !important;">
             <div class="header-wrapper_inner">
                 <div class="header-wrapper_logo">
                     <a href="javascript:void(0)" class="callNavigation">
@@ -121,7 +121,7 @@
     </header>
 
     {% comment %} {% include 'navbar_old.html' %} {% endcomment %}
-    <div class="template-main">
+    <div class="template-main" style="max-width: 1170px !important; margin: auto !important;">
         {% block content %} {% endblock content %}
     </div>
 

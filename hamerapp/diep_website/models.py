@@ -220,7 +220,7 @@ class ReleaseProduct(models.Model):
         cateObj = Category.objects.get(id = self.article.category.id)
         for x in range(self.product_quantity):
             productObj = Product()
-            product_code = secrets.token_urlsafe() + secrets.token_urlsafe()
+            product_code = secrets.token_urlsafe()
             productObj.product_code = product_code
             productObj.release_name = self.name
             productObj.category = cateObj
