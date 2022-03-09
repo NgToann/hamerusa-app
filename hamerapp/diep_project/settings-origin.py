@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-a%x(s@6d0nwag7@z6*qr--1bp0_m=tdz4zax$h!*hg81_0ehfx
 # DEBUG = os.environ.get('DEBUG')
 # DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 DEBUG=True
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
 
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'diep_website',
     'import_export',
+    'django_summernote',
     # 'embed_video',
     # 'rangefilter',
     # 'tinymce',

@@ -32,6 +32,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 # ALLOWED_HOSTS = ['https://hamerapp.herokuapp.com/']
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'diep_website',
     'import_export',
+    'django_summernote',
     # 'embed_video',
     # 'rangefilter',
     # 'tinymce',

@@ -26,6 +26,7 @@ urlpatterns = [
     re_path(r'^$', views.home, name="home"),
     path('admin/', admin.site.urls),
     path('tinymce/',include('tinymce.urls')),
+    path('summernote/', include('django_summernote.urls')),
     path('', include('diep_website.urls')),
     re_path(r'^export-exl/$', views.export, name='export'),
     re_path(r'^export-csv/$', views.export, name='export'),

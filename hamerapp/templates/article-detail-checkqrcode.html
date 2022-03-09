@@ -45,6 +45,6 @@
         {% load humanize %}
         <h2>{{product.product_name}} - {{product.product_price|intcomma}} vnd</h2>
         {% endif %} 
-    </span> {{article.body|safe}}
+    </span> {{article.content|safe}}
 </div>
 {% endblock content %}

@@ -3,6 +3,7 @@ from django.urls import reverse
 from .models import *
 from . import views
 from import_export.admin import ImportExportModelAdmin
+from django_summernote.admin import SummernoteModelAdmin
 # from rangefilter.filters import DateRangeFilter
 # from mce_filebrowser.admin import MCEFilebrowserAdmin
 from .forms import *
@@ -48,9 +49,10 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'created')
 admin.site.register(Category, CategoryAdmin)
 
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(SummernoteModelAdmin):
     list_display = ('title', 'slug','created')
-    form = ArticleAdminForm
+    # form = ArticleAdminForm
+    summernote_fields = ('content')
 admin.site.register(Article, ArticleAdmin)
 
 @admin.register(Product)

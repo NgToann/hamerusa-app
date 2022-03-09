@@ -175,7 +175,8 @@ class Article(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Danh mục")
     title = models.CharField(max_length=500, null=False, blank=False, verbose_name="Tên bài viết")
     slug = models.CharField(max_length=500, null=True, blank=True, unique=True ,verbose_name="Đường dẫn")
-    body = models.TextField(verbose_name="Nội dung")
+    # body = models.TextField(verbose_name="Nội dung")
+    content = models.TextField(null=True, blank=True, verbose_name="Nội dung")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Ngày tạo")
     updated = models.DateTimeField(auto_now=True)
     def __str__(self):
