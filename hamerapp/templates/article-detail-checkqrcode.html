@@ -43,7 +43,8 @@
     <span>
         {% if product %}
         {% load humanize %}
-        <h2>{{product.product_name}} - {{product.product_price|intcomma}} vnd</h2>
+        {% comment %} <h2>{{product.product_name}} - {{product.product_price|intcomma}} vnd</h2> {% endcomment %}
+        <h2>{{product.product_name}}</h2>
         {% endif %} 
     </span> {{article.content|safe}}
 </div>
